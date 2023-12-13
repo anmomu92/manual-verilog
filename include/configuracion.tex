@@ -1,0 +1,102 @@
+\usepackage{tcolorbox}
+\usepackage{subcaption}
+\usepackage{alltt}
+
+\usepackage{xcolor}
+\definecolor{color-uclm}{RGB}{176,8,55} % Adjust the RGB values as needed
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+% Define a new tcolorbox environment for key concepts
+\newtcolorbox{keyconceptbox}[1][]{ % Optional argument for title
+  colback=blue!5!white, % Use the custom color
+  colframe=blue, % Use the same color for the border
+  fonttitle=\bfseries, % Title font
+  title={#1}, % Title text
+  rounded corners, % Set the radius for rounded corners
+  boxrule=2pt % Border width
+}
+
+% Define a new tcolorbox environment for aclaraciones
+\newtcolorbox{aclaracion}[1][]{ % Optional argument for title
+  colback=red!5!white, % Use the custom color
+  colframe=color-uclm, % Use the same color for the border
+  fonttitle=\bfseries, % Title font
+  title={#1}, % Title text
+  rounded corners, % Set the radius for rounded corners
+  boxrule=2pt % Border width
+}
+
+\usepackage{listings}
+
+\lstnewenvironment{mycode}[1][]
+{\lstset{#1}} % Options for the listings package
+{}
+
+\lstdefinestyle{mycodestyle}{
+  backgroundcolor=\color{gray!10}, % Background color
+  % Add other styling options as needed
+}
+
+\lstdefinestyle{cstyle}{
+    language=C,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    captionpos=b,
+    showstringspaces=false,
+    tabsize=4
+}
+
+
+\lstdefinestyle{verilogstyle}{
+  language=Verilog, % Set the language to Verilog
+  basicstyle=\ttfamily\small,
+  commentstyle=\color{mygreen},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\color{mygray},
+  stringstyle=\color{mymauve},
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  showstringspaces=false
+}
+
+
+\usepackage{wrapfig}
+
+
+% lcverbatim
+\usepackage{fancyvrb,newverbs,xcolor}
+
+%\setmonofont[Scale=0.8]{Courier New Bold}
+\definecolor{cverbbg}{gray}{0.93}
+\newenvironment{cverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{\BUseVerbatim{cverb}}%
+  \endflushleft
+}
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+\newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}
+\newverbcommand{\cverb}
+  {\setbox\verbbox\hbox\bgroup}
+  {\egroup\colorbox{cverbbg}{\box\verbbox}}
+% lcverbatim

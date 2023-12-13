@@ -1,0 +1,17 @@
+\section{Simulación}
+
+Una vez que la tenemos un modelo de Verilog con sintaxis y semántica correcta, se puede y debe utilizar un simulador para observar su operación.
+
+El simulador opera comenzando en un \hyperlink{simulation_time}{\emph{tiempo de simulación}} de cero. En este punto, el simulador inicializa todas las señales a un valor por defecto de \verb|x|. A continuación, el simulador inicializa las señales o variables cuyos valores iniciales han sido declarados explícitamente. Tras esto, el simulador comienza la ejecución de las sentencias concurrentes del diseño.
+
+\begin{aclaracion}[Aclaración]
+    El simulador en realidad no puede ejecutar las sentencias concurrentes simultáneamente. Sin embargo, crea esa ilusión mediante el uso de una \hyperlink{event_list}{\emph{lista de eventos}} basados en tiempo. y una \hyperlink{sensitivity_matrix}{matriz de sensibilidad} basada en todas las listas de sensibilidad individuales.\\
+
+    Cada sentencia concurrente se da lugar a un procesos software, mientras que una instanciación de módulo puede dar lugar a uno o más procesos. En tiempo de simulación cero, todos los procesos generados se planifican para ejecución, de los cuales se selecciona uno. La ejecución del código procedural se lleva a cabo secuencialmente. Si se ha especificado una demora, la ejecución del proceso se suspende. Cuando esto ocurre (o cuando el proceso se ha terminado de ejecutar) se selecciona otro proceso para su ejecución.\\
+
+    Cuando todos los procesos se han ejecutado, se completa lo que se denomina un \hyperlink{simulation_cycle}{\emph{ciclo de simulación}}.
+\end{aclaracion}
+
+Cuando el simulador se encuentra una asignación no bloqueante sin demora, ésta se supone que se ejecuta en tiempo de simulación cero. No obstante, lo que ocurre realmente es que se planifica su ejecución para el tiempo de simulación actual al que se le suma una \hyperlink{delta_delay}{\emph{demora delta}}. 
+
+Cada vez que un ciclo de simulación es completado, la lista de eventos es escaneada para buscar las señales que antes cambien. Debido a que algunos procesos pueden ser sensibles al cambio de señales, la matriz de sensibilidad indica, para cada señal, qué procesos tienen dicha señal en su lista de sensibilidad. Cada proceso que sea sensible a una señal, será planificado para que se ejecute en el siguiente ciclo de simulación. Este proceso se repite hasta que la lista de eventos queda vacía, momento en el cual la simulación termina.
