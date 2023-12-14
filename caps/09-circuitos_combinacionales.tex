@@ -121,3 +121,42 @@ Los buffers triestado son raramente usados en chip, es decir, dentro de ASICs o 
 En la sección de codificadores binarios (\textcolor{red}{REFERENCIAR}) se vio que estos dispositivos seleccionan la entrada activa de entre $2^n$ para codificarla en la salida pero, ¿qué ocurre si varias entradas están activas al mismo tiempo? En este caso convendría asignar una \emph{prioridad} a cada una para que la entrada con más prioridad sea la seleccionada por el codificador. Los dispositivos que hacen esto se denominan \hyperlink{priority_encoder}{\emph{codificadores con prioridad}}.
 
 Los codificadores con prioridad tienen una salida \hyperlink{IDLE}{\emph{OCIOSA}} que se activa si ninguna de las entradas está activa.
+
+\subsection{Puertas OR-exclusivas y funciones de paridad}
+
+Las puertas \hyperlink{exclusive-OR}{\emph{OR-exclusivas}} son importante en cuatro aplicaciones:
+
+\begin{itemize}
+    \item \emph{Comparación.}
+    \item \emph{Generación de paridad.}
+    \item \emph{Suma.}
+    \item \emph{Contaje.}
+\end{itemize}
+
+\subsection{Comparadores}
+La comparación de dos palabras binarias es una operación frecuentemente usada en computadores. El circuito que se encarga de comparar dos palabras binarias y de decir si son iguales o no se denomina \hyperlink{comparator}{\emph{comparador}}. Algunos comparadores son capaces de interpretar las palabras a comparar como numeros con o sin signo, y realizar comparaciones de mayor/menor o igual. En este caso hablamos de \hyperlink{magnitude_comparator}{comparadores de magnitudes}.
+
+\subsection{Elementos combinacionales aritméticos}
+Estos elementos incluyen circuitos que son capaces de llevar a cabo funciones aritmeticas, como sumas, multiplicaciones, divisiones o desplazamientos. Normalmente existen operadores que se encargan de estas operaciones, dejando al sintetizador la responsabilidad de generar el circuito a partir de dicho operador. En el caso concreto de las FPGA, estas consisten exclusivamente de TCs (LUTs) interconectadas, por lo que será responsabilidad del sintetizador adaptar el código a dicha infraestructura. Los elementos combinacionales aritméticos son los siguientes:
+
+\begin{itemize}
+    \item \hyperlink{half_adder}{\emph{Semisumador}} y \hyperlink{full_adder}{\emph{Sumador completo}}. El semisumador suma dos operandos de un bit produciendo una suma de dos bits, el bit de bajo orden es la \emph{semisuma (S)} mientras que el de alto orden es el \emph{acarreo (COUT)}. Los sumadores completos realizan la misma operación de suma pero con números de más de un bit. Un sumador completo tiene, además de los operandos y el resultado de dos bit, una señal de entrada para el acarreo de la suma del bit inmediatamente anterior \emph{CIN}.
+    \item \hyperlink{ripple_adder}{\emph{Sumador con propagación.}} Estos circuitos suman palabras de $n$ bits y consisten en una cascada de $n$ sumadores completos, cada uno de los cuales se encarga de la suma de un bit. El COUT de cada sumador completo se conecta con el CIN del sumador completo siguiente (exceptuando la del último)\footnote{De ahí el nombre de este sumador, ya que el acarreo se va propagando a través del circuito.}. Además, al CIN del sumador completo menos significativo se le suele conectar un valor de cero. La desventaja de este tipo de circuitos es que son lentos, especialmente aquellos que sumen números muy grandes.
+    \item \hyperlink{carry-lookahead_adder}{\emph{Sumador con anticipación de acarreo.}} Este sumador mejora el desempeño del sumador con propagación. Al igual que en el anterior, en este sumador existen una serie de fases que suman un bit cada una. Pero en este caso ocurren pueden ocurrir dos cosas.
+    
+    \begin{enumerate}
+        \item \emph{Generación de acarreo.} Esto ocurre cuando una fase $i$ produce un acarreo de salida independientemente de que haya acarreo de entrada, es decir, cuando ambos sumandos valen uno.
+        \item \emph{Propagación de acarreo.} Esto ocurre cuando se genera un acarreo siguiendo la lógica anterior, es decir, cuando ambos sumandos valen uno.
+    \end{enumerate}
+
+    \item \hyperlink{group-ripple_adders}{\emph{Sumadores con propagación grupal}}
+    \item \hyperlink{group-carry_lookahead}{\emph{Sumadores con anticipación de acarreo grupal}}
+
+    \item \hyperlink{substractor}{\emph{Restadores.}} Realizan la operación opuesta al sumador. \textcolor{red}{DESARROLLAR}.
+    
+    \item \hyperlink{shifter}{\emph{Desplazadores}} y \hyperlink{Rotator}{\emph{Rotadores}}. El desplazamiento y la rotación son dos operaciones muy utilizadas. El desplazamiento es la operación de mover los bits de una palabra de $n$ bits una o mas posiciones hacia la izquierda/derecha. Los bits que se caigan de dicha palabra serán reemplazados por nuevos bits (normalmente ceros). La rotación funciona de manera similar solo que en este caso los bits que se caigan retornan llenando las posiciones de los bits vacantes en el otro extremo de la palabra \footnote{Por esto, a la rotación se le suele denominar también desplazamiento circular.}. El circuito más representativo de esta categoría es el \hyperlink{barrel_shifter}{Desplazador en barril}.
+    
+    \item \emph{Multiplicadores}
+    \item \emph{Divisores}
+    
+\end{itemize}
