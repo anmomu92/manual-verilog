@@ -112,7 +112,7 @@ Los demultiplexores son los dispositivos digitales que realizan la operación op
 \section{Dispositivos triestado}
 Los \hyperlink{threestate_device}{\emph{dispositivos triestado}} son muy importantes porque, a nivel de la placa de circuito impreso son una alternativa ampliamente utilizada a los multiplexores. Existen diferentes tipos de dispositivos triestado.
 
-\subsubsection{Buffers triestado}
+\subsection{Buffers triestado}
 Es el dispositivo triestado más sencillo. También se le puede llamar \hyperlink{threestate_driver}{\emph{conductor triestado}}. El buffer triestado es como un buffer normal al que se le conecta una tercera señal llamada \hyperlink{threestate_enable}{\emph{habilitación triestado}}. Cuando esta señal está activa, el buffer actúa como un buffer corriente, conectando la entrada a la salida. Por el contrario, cuando habilitación triestado es cero, la salida pasa a un estado de alta impedancia y el buffer se comporta como si ni siquiera estuviese ahí. 
 
 Los buffers triestado son raramente usados en chip, es decir, dentro de ASICs o FPGAs, ya que los multiplexores suelen ofrecer un mayor desempeño.
