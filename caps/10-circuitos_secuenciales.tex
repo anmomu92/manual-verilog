@@ -117,7 +117,7 @@ module mef (
 
             // entradas
             input A,
-            intput B,
+            input B,
 
             // salidas (como vamos a usar codigo procedural, hay que declarar la salida como reg)
             output reg Z
@@ -145,7 +145,7 @@ always @(*) begin
         OK0: if (A == 0) estado_siguiente = OK0;
              else if ((A == 0) && (B == 1)) estado_siguiente = OK1;
              else estado_siguiente = A1;
-        OK1: if ((A == 0) && (B == 0)) estado_siguiente = A0;
+        OK1: if ((A == 0) && (B == 0))             estado_siguiente = A0;
         else if ((A == 0) && (B == 1)) estado_siguiente = OK0;
         else estado_siguiente = OK1;
         default: estado_siguiente = INIT;
@@ -171,5 +171,5 @@ always @(posedge clk) begin
     else
         estado <= estado_siguiente;
 end
-
+endmodule
 \end{mycode}
