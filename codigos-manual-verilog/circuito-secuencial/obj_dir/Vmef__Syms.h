@@ -7,10 +7,13 @@
 #ifndef _VMEF__SYMS_H_
 #define _VMEF__SYMS_H_  // guard
 
-#include "verilated.h"
+#include "verilated_heavy.h"
 
 // INCLUDE MODULE CLASSES
 #include "Vmef.h"
+
+// DPI TYPES for DPI Export callbacks (Internal use)
+typedef void (*Vmef__Vcb_sv_get_estado_t) (Vmef__Syms* __restrict vlSymsp);
 
 // SYMS CLASS
 class Vmef__Syms : public VerilatedSyms {
@@ -24,6 +27,9 @@ class Vmef__Syms : public VerilatedSyms {
     
     // SUBCELL STATE
     Vmef*                          TOPp;
+    
+    // SCOPE NAMES
+    VerilatedScope __Vscope_mef;
     
     // CREATORS
     Vmef__Syms(Vmef* topp, const char* namep);

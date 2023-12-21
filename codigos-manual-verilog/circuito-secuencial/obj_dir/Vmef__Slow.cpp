@@ -5,6 +5,8 @@
 #include "Vmef.h"
 #include "Vmef__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 CData/*2:0*/ Vmef::__Vtable1_mef__DOT__estado_siguiente[32];
 CData/*0:0*/ Vmef::__Vtable2_Z[8];

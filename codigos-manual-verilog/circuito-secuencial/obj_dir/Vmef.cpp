@@ -5,6 +5,8 @@
 #include "Vmef.h"
 #include "Vmef__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 
 void Vmef::eval_step() {
@@ -31,7 +33,7 @@ void Vmef::eval_step() {
             Verilated::debug(1);
             __Vchange = _change_request(vlSymsp);
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("mef.v", 1, "",
+            VL_FATAL_MT("mef.sv", 1, "",
                 "Verilated model didn't converge\n"
                 "- See DIDNOTCONVERGE in the Verilator manual");
         } else {
@@ -57,13 +59,31 @@ void Vmef::_eval_initial_loop(Vmef__Syms* __restrict vlSymsp) {
             Verilated::debug(1);
             __Vchange = _change_request(vlSymsp);
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("mef.v", 1, "",
+            VL_FATAL_MT("mef.sv", 1, "",
                 "Verilated model didn't DC converge\n"
                 "- See DIDNOTCONVERGE in the Verilator manual");
         } else {
             __Vchange = _change_request(vlSymsp);
         }
     } while (VL_UNLIKELY(__Vchange));
+}
+
+void Vmef::__Vdpiexp_mef__DOT__sv_get_estado_TOP(Vmef__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vmef::__Vdpiexp_mef__DOT__sv_get_estado_TOP\n"); );
+    // Variables
+    Vmef* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
+    // Body
+    VL_WRITEF("(SV) Hola Perro\n");
+}
+
+void Vmef::sv_get_estado() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vmef::sv_get_estado\n"); );
+    // Body
+    static int __Vfuncnum = -1;
+    if (VL_UNLIKELY(__Vfuncnum==-1)) { __Vfuncnum = Verilated::exportFuncNum("sv_get_estado"); }
+    const VerilatedScope* __Vscopep = Verilated::dpiScope();
+    Vmef__Vcb_sv_get_estado_t __Vcb = (Vmef__Vcb_sv_get_estado_t)(VerilatedScope::exportFind(__Vscopep, __Vfuncnum));
+    (*__Vcb)((Vmef__Syms*)(__Vscopep->symsp()));
 }
 
 VL_INLINE_OPT void Vmef::_sequent__TOP__1(Vmef__Syms* __restrict vlSymsp) {

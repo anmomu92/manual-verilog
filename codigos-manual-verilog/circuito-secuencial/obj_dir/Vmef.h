@@ -8,7 +8,8 @@
 #ifndef _VMEF_H_
 #define _VMEF_H_  // guard
 
-#include "verilated.h"
+#include "verilated_heavy.h"
+#include "Vmef__Dpi.h"
 
 //==========
 
@@ -78,6 +79,7 @@ VL_MODULE(Vmef) {
     static void _eval_initial_loop(Vmef__Syms* __restrict vlSymsp);
   public:
     void __Vconfigure(Vmef__Syms* symsp, bool first);
+    static void __Vdpiexp_mef__DOT__sv_get_estado_TOP(Vmef__Syms* __restrict vlSymsp);
   private:
     static QData _change_request(Vmef__Syms* __restrict vlSymsp);
     static QData _change_request_1(Vmef__Syms* __restrict vlSymsp);
@@ -96,6 +98,7 @@ VL_MODULE(Vmef) {
     static void _eval_settle(Vmef__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _sequent__TOP__1(Vmef__Syms* __restrict vlSymsp);
     static void _settle__TOP__2(Vmef__Syms* __restrict vlSymsp) VL_ATTR_COLD;
+    static void sv_get_estado();
   private:
     static void traceChgSub0(void* userp, VerilatedVcd* tracep);
     static void traceChgTop0(void* userp, VerilatedVcd* tracep);
