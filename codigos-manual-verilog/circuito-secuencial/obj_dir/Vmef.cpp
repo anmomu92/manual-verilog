@@ -68,22 +68,27 @@ void Vmef::_eval_initial_loop(Vmef__Syms* __restrict vlSymsp) {
     } while (VL_UNLIKELY(__Vchange));
 }
 
-void Vmef::__Vdpiexp_mef__DOT__sv_get_estado_TOP(Vmef__Syms* __restrict vlSymsp) {
+void Vmef::__Vdpiexp_mef__DOT__sv_get_estado_TOP(Vmef__Syms* __restrict vlSymsp, CData/*7:0*/ (&sv_get_estado__Vfuncrtn)) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vmef::__Vdpiexp_mef__DOT__sv_get_estado_TOP\n"); );
     // Variables
     Vmef* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    VL_WRITEF("(SV) Hola Perro\n");
+    sv_get_estado__Vfuncrtn = vlTOPp->mef__DOT__estado;
 }
 
-void Vmef::sv_get_estado() {
+char Vmef::sv_get_estado() {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vmef::sv_get_estado\n"); );
+    // Variables
+    CData/*7:0*/ sv_get_estado__Vfuncrtn__Vcvt;
     // Body
     static int __Vfuncnum = -1;
     if (VL_UNLIKELY(__Vfuncnum==-1)) { __Vfuncnum = Verilated::exportFuncNum("sv_get_estado"); }
     const VerilatedScope* __Vscopep = Verilated::dpiScope();
     Vmef__Vcb_sv_get_estado_t __Vcb = (Vmef__Vcb_sv_get_estado_t)(VerilatedScope::exportFind(__Vscopep, __Vfuncnum));
-    (*__Vcb)((Vmef__Syms*)(__Vscopep->symsp()));
+    (*__Vcb)((Vmef__Syms*)(__Vscopep->symsp()), sv_get_estado__Vfuncrtn__Vcvt);
+    char sv_get_estado__Vfuncrtn;
+    sv_get_estado__Vfuncrtn = sv_get_estado__Vfuncrtn__Vcvt;
+    return sv_get_estado__Vfuncrtn;
 }
 
 VL_INLINE_OPT void Vmef::_sequent__TOP__1(Vmef__Syms* __restrict vlSymsp) {

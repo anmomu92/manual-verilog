@@ -14,7 +14,7 @@ extern "C" {
     
     // DPI EXPORTS
     // DPI export at mef.sv:21:15
-    extern void sv_get_estado();
+    extern char sv_get_estado();
     
 #ifdef __cplusplus
 }

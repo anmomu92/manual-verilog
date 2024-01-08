@@ -106,7 +106,7 @@ void Vmef::_ctor_var_reset() {
     __Vtable1_mef__DOT__estado_siguiente[24] = 2U;
     __Vtable1_mef__DOT__estado_siguiente[25] = 2U;
     __Vtable1_mef__DOT__estado_siguiente[26] = 4U;
-    __Vtable1_mef__DOT__estado_siguiente[27] = 2U;
+    __Vtable1_mef__DOT__estado_siguiente[27] = 4U;
     __Vtable1_mef__DOT__estado_siguiente[28] = 4U;
     __Vtable1_mef__DOT__estado_siguiente[29] = 0U;
     __Vtable1_mef__DOT__estado_siguiente[30] = 0U;

@@ -18,8 +18,8 @@ module mef (
 export "DPI-C" function sv_get_estado;
 
 /*verilator lint_off WIDTH*/
-function void sv_get_estado(); 
-   $display("(SV) Hola Perro"); 
+function byte sv_get_estado(); 
+    return estado;
 endfunction
 /*verilator lint_on WIDTH*/
 
@@ -37,18 +37,28 @@ parameter [2:0] INIT = 3'b000,
 // comportamiento del estado siguiente
 always @(*) begin
     case(estado)
-        INIT: if (A == 0) estado_siguiente = A0;
-              else estado_siguiente = A1;
-        A0: if (A == 0) estado_siguiente = OK0;
-            else estado_siguiente = A1;
-        A1: if (A == 0) estado_siguiente = A0;
-            else estado_siguiente = OK1;
-        OK0: if (A == 0) estado_siguiente = OK0;
-             else if ((A == 0) && (B == 1)) estado_siguiente = OK1;
-             else estado_siguiente = A1;
-        OK1: if ((A == 0) && (B == 0)) estado_siguiente = A0;
-        else if ((A == 0) && (B == 1)) estado_siguiente = OK0;
-        else estado_siguiente = OK1;
+        INIT: begin
+                if (A == 0) estado_siguiente = A0;
+                else estado_siguiente = A1;
+              end
+        A0: begin 
+                if (A == 0) estado_siguiente = OK0;
+                else estado_siguiente = A1;
+            end
+        A1: begin
+                if (A == 0) estado_siguiente = A0;
+                else estado_siguiente = OK1;
+            end
+        OK0: begin
+                if (A == 0) estado_siguiente = OK0;
+                else if ((A == 1) && (B == 1)) estado_siguiente = OK1;
+                else estado_siguiente = A1;
+            end
+        OK1: begin
+                if ((A == 0) && (B == 0)) estado_siguiente = A0;
+                else if ((A == 0) && (B == 1)) estado_siguiente = OK0;
+                else estado_siguiente = OK1;
+            end
         default: estado_siguiente = INIT;
     endcase
 end

@@ -16,7 +16,7 @@
 
 #ifndef _VL_DPIDECL_sv_get_estado
 #define _VL_DPIDECL_sv_get_estado
-void sv_get_estado() {
+char sv_get_estado() {
     // DPI export at mef.sv:21:15
     return Vmef::sv_get_estado();
 }
