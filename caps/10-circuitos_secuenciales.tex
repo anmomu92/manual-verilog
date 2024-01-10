@@ -453,7 +453,7 @@ La diferencia entre latch y flip-flop es que mientras el latch refleja inmediata
 
 \subsubsection{Latch S-R}
 
-Los \hyperlink{sr_latch}{\emph{Latch S-R}} son el circuito secuencial más simple que se puede construir y que tenga entradas de control. Se puede construir con dos puertas NOR de dos entradas (véase la Figura \ref{fig:latch-sr}). 
+Los \hyperlink{sr_latch}{\emph{latch S-R}} son el circuito secuencial más simple que se puede construir y que tenga entradas de control. Se puede construir con dos puertas NOR de dos entradas (véase la Figura \ref{fig:latch-sr}). 
 
 \begin{wrapfigure}{o}{0.4\textwidth}
     \centering
@@ -481,4 +481,10 @@ La 'S' y la 'R' vienen del inglés \emph{set} y \emph{reset}, y son las señales
   
     \caption{Diagrama de ondas de un latch S-R}
     \label{fig:wave-latch-sr}
-  \end{figure}
+\end{figure}
+
+\subsubsection{Latch $\overline{\text{S}}$-$\overline{\text{R}}$}
+Los \emph{latch $\overline{S}$-$\overline{R}$} funcionan de manera similar a los anteriores, con la diferencia de que las entradas S y R son activas a nivel bajo. A diferencia de los latch S-R, estos pueden ser construidos a partir de puertas NAND. Debido a que las puertas NAND ofrecen ciertas ventajas sobre las NOR, en términos de velocidad y tamaño, estos latches suelen utilizarse más en cirtos contextos.
+
+\subsubsection{Latch D}
+A pesar de que tanto el latch S-R como el $\overline{S}$-$\overline{R}$ pueden almacenar información, éstos se usan más en respuestas a ciertos cambios de condiciones del sistema que requieren reseteos. Para el almacenamiento de bits de información se utilizan otra clase de circuitos, que se verán a continuación. El primero de ellos es el \emph{latch D}
