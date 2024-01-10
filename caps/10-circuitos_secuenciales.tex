@@ -487,4 +487,14 @@ La 'S' y la 'R' vienen del inglés \emph{set} y \emph{reset}, y son las señales
 Los \emph{latch $\overline{S}$-$\overline{R}$} funcionan de manera similar a los anteriores, con la diferencia de que las entradas S y R son activas a nivel bajo. A diferencia de los latch S-R, estos pueden ser construidos a partir de puertas NAND. Debido a que las puertas NAND ofrecen ciertas ventajas sobre las NOR, en términos de velocidad y tamaño, estos latches suelen utilizarse más en cirtos contextos.
 
 \subsubsection{Latch D}
-A pesar de que tanto el latch S-R como el $\overline{S}$-$\overline{R}$ pueden almacenar información, éstos se usan más en respuestas a ciertos cambios de condiciones del sistema que requieren reseteos. Para el almacenamiento de bits de información se utilizan otra clase de circuitos, que se verán a continuación. El primero de ellos es el \emph{latch D}
+
+\begin{wrapfigure}{o}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figs/latch-d.drawio.png}
+    \caption{Latch D.}
+    \label{fig:latch-d}
+\end{wrapfigure}
+
+A pesar de que tanto el latch S-R como el $\overline{S}$-$\overline{R}$ pueden almacenar información, éstos se usan más en respuestas a ciertos cambios de condiciones del sistema que requieren reseteos. Para el almacenamiento de bits de información se utilizan otra clase de circuitos, que se verán a continuación. El primero de ellos es el \emph{latch D}.
+
+Como se puede ver en la Figura \ref{fig:latch-d}, el latch D se construye sobre un latch $\overline{\text{S}}$-$\overline{\text{R}}$ al que se añaden dos puertas NAND con dos entradas: D, que es el dato que se quiere almacenar; y G, que es una señal de control que evita que se produzca la situación en la que tanto $\overline{\text{S}}$ como $\overline{\text{R}}$ sean afirmadas, dando lugar a metaestabilidad. De esta manera, 
