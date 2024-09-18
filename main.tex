@@ -3,221 +3,34 @@
 %	  Instructions for authors: tinyurl.com/techpubsnist 
 %	DOI watermark will be added on final PDF
 % 	Developed by K. Miller, kmm5@nist.gov 
+%	Modified by Antonio Morán Muñoz
 %	Last updated: 22-January-2021
+%   Referencias:
+%       - https://veripool.org/ftp/verilator_doc.pdf
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[12pt]{book}
 
-\input{include/configuracion}
-
-\usepackage{amsmath}
-\usepackage{amsfonts}   % if you want the fonts
-\usepackage{amssymb}    % if you want extra symbols
-\usepackage{graphicx}   % need for figures
-\usepackage{xcolor}
-\usepackage{bm}
-\usepackage{secdot}		
-\usepackage{mathptmx}
-\usepackage{float}
-\usepackage[utf8]{inputenc}
-\usepackage{textcomp}
-\usepackage[hang,flushmargin,bottom]{footmisc} % footnote format
-\usepackage{multirow}
-\usepackage{tabularray}
-
-\usepackage{titlesec}
-\titleformat{\section}{\normalsize\bfseries}{\thesection.}{1em}{}	% required for heading numbering style
-\titleformat*{\subsection}{\normalsize\bfseries}
-
-\usepackage{tocloft}	% change typeset, titles, and format list of appendices/figures/tables
-\renewcommand{\cftdot}{}	
-\renewcommand{\contentsname}{Table of Contents}
-\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} % for parts
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-\renewcommand\cftbeforesecskip{\setlength{4pt}{}}
-\addtolength{\cftfignumwidth}{1em}
-\renewcommand{\cftfigpresnum}{\figurename\ }
-\addtolength{\cfttabnumwidth}{1em}
-\renewcommand{\cfttabpresnum}{\tablename\ }
-\setlength{\cfttabindent}{0in}    %% adjust as you like
-\setlength{\cftfigindent}{0in} 
-
-\usepackage{enumitem}         % to control spacing between bullets/numbered lists
-
-\usepackage[numbers,sort&compress]{natbib} % format bibliography 
-\renewcommand{\bibsection}{}
-\setlength{\bibsep}{0.0pt}
-
-\usepackage[hidelinks]{hyperref}
-\hypersetup{
-	colorlinks = true,
-urlcolor ={blue},
-citecolor = {.},
-linkcolor = {.},
-anchorcolor = {.},
-filecolor = {.},
-menucolor = {.},
-runcolor = {.}
-pdftitle={},
-pdfsubject={},
-pdfauthor={},
-pdfkeywords={}
-}
-\urlstyle{same}
-
-\usepackage{epstopdf} % converting EPS figure files to PDF
-
-\usepackage{fancyhdr, lastpage}	% formatting document, calculating number of pages, formatting headers
-\setlength{\topmargin}{-0.5in}
-\setlength{\headheight}{39pt}
-\setlength{\oddsidemargin}{0.25in}
-\setlength{\evensidemargin}{0.25in}
-\setlength{\textwidth}{6.0in}
-\setlength{\textheight}{8.5in}
-
-\usepackage{caption} % required for Figure labels
-\captionsetup{font=small,labelfont=bf,figurename=Fig.,labelsep=period,justification=raggedright} 
-
-% Fix for pdfTeX warning of form: … found PDF version <1.6>, but at most version <1.5> allowed
-% https://tex.stackexchange.com/questions/52317/pdftex-warning-version-allowed
-\pdfminorversion=7
-
-%%%%%%%%%%% !!!!!! REQUIRED - FILL OUT METADATA HERE !!!!!!!! %%%%%%%%%%%%%%
-%  	Report Number - fill in Report Number sent to you (see info below)
-%   DOI Statement - fill in DOI sent to you 
-%   Month Year - fill in Month and Year of Publication
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\pubnumber}{XXXX}
-\newcommand{\DOI}{https://doi.org/10.6028/NIST.HB.XXXX}
-\newcommand{\monthyear}{Month Year}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   	BEGIN DOCUMENT 
+%   	Incluimos la configuración y los metadatos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{include/configuracion}
+\input{include/metadatos}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   	Comenzamos el documento 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-	\urlstyle{rm} % Format style of \url   
+
+	\urlstyle{rm} % Formateamos el estilo de las url   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Cover Page is REQUIRED and must contain the information 
-%	displayed here, at a minimum. Additional artwork may be included 
-%	(e.g., official project/conference logo, etc.).
-%	Pub Number automated based on metadata
+%   CABECERA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{titlepage}
-\begin{flushright}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 	Automated based on metadata - delete if not applicable
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\LARGE{\textbf{Computadores Avanzados}}\\
-\vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	Title 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Huge{\textbf{Manual de Verilog}}\\
-    \vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	Authors - add complete list of authors, affiliations will be 
-%   added on title page
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \large Antonio Morán Muñoz\\
-\vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	The DOI is automated based on metadata.	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\normalsize Manual de Verilog\\
-\vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	NIST LOGO - keep as-is
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{include/cabecera}
 
-\includegraphics[width=0.3\linewidth]{figs/esiiab-logo.jpg}\\ 
- 
-  
-\end{flushright}
-\end{titlepage}
-\begin{titlepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	Title Page is REQUIRED
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{flushright}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Publication Series & Number - automated
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\LARGE{\textbf{Diseño Digital}}\\
-\vfill 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	Title 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Huge{\textbf{Manual de Verilog}}\\
-    \vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	Author Order and Grouping. Always identify the primary author/creator first (s/he does not have to be a NIST author). For publications with multiple authors, group authors by their organizational affiliation. The organizational groupings and the names within each grouping should generally be ordered by decreasing level of contribution.
-%	For non-NIST authors, list their city and state below their organization name.
-%	For NIST authors, include the Division and Laboratory names (but do not include their city and state).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \normalsize Antonio Morán Muñoz\\
-     \textit{Instituto de Investigación en Informática (I3A)}\\
-    \vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   DOI Statement - automated
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\normalsize Esta publicación está basada en la plantilla NIST Handbook de Overleaf\\
-\vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Date - Month and Year - automated
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\normalsize Septiembre 2023
-\vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Department of Commerce LOGO - leave as-is
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-
-\includegraphics[width=0.5\linewidth]{figs/logo-cooiiclm.png}\\ 
- \vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Department of Commerce & NIST Leadership 
-%	will be updated as changes occur
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\footnotesize Departamento de Sistemas Informáticos\\ 
-%\textit{Gina M. Raimondo, Secretary}\\
-\vspace{10pt}
-Universidad de Castilla-La Mancha\\ 
-%\hspace*{-3cm}\textit{James K. Olthoff, Performing the Non-Exclusive Functions and Duties of the Under Secretary of Commerce \\
-%for Standards and Technology \& Director, National Institute of Standards and Technology}
-\end{flushright}
-\end{titlepage}
-\begin{titlepage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Disclaimer/CODEN page - required
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{flushright}
-\footnotesize  Certain commercial entities, equipment, or materials may be identified in this document in order to describe an experimental procedure or concept adequately. Such identification is not intended to imply recommendation or endorsement by the National Institute of Standards and Technology, nor is it intended to imply that the entities, materials, or equipment are necessarily the best available for the purpose.\\ 
-
-\vfill
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   This secton automated - do not change
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\normalsize \textbf{National Institute of Standards and Technology Handbook \pubnumber\\ 
-Natl. Inst. Stand. Technol. Handbook \pubnumber, \pageref{LastPage} pages (\monthyear)} \\
-\vspace{12pt}
-\textbf{This publication is available free of charge from: \DOI}
-\vfill
-\end{flushright}
-\end{titlepage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Start front matter - page number starts with "i"
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Foreword}
-\pagenumbering{roman}
-\normalsize Delete if not applicable\\
-\section*{Preface}
-\normalsize Delete if not applicable\\
-\section*{Abstract}
-\normalsize Required\\
-\section*{Key words}
-\normalsize Required, alphabetized, separated by semicolon, and end in a period.\\
-\pagebreak
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Table of Contents is required
-% 	List of Tables & Figures required if more than 5 tables/figures
+%   TABLA DE CONTENIDOS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
 \tableofcontents
@@ -225,54 +38,34 @@ Natl. Inst. Stand. Technol. Handbook \pubnumber, \pageref{LastPage} pages (\mont
 \listoffigures
 \end{center}
 \pagebreak
-\section*{Glossary}
-Delete if not applicable\\
+\section*{Glosario}
+\input{caps/99-glosario}
 \pagebreak
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Start body of text - page number starts with "1"
+%   CUERPO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagenumbering{arabic}
-\input{caps/practica01}
+\input{caps/01-intro}
 \newpage
-\input{caps/practica02}
-\newpage
-\input{caps/practica03}
-\newpage
-\input{caps/practica04}
-\newpage
-\input{caps/practica05}
-\newpage
-\input{caps/practica06}
-\newpage
-\input{caps/07-simulacion}
-\newpage
-\input{caps/08-bancos_de_pruebas}
-\newpage
-\input{caps/09-circuitos_combinacionales}
-\newpage
-\input{caps/10-circuitos_secuenciales}
-\newpage
-\input{caps/99-glosario}
+\input{caps/02-ejemplos}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Figure references are “Fig. X��.
-% 	“Figure X�� is used at beginning of sentence. 
-% 	Figures should appear after they are mentioned in the text.
-%	Figures must have embedded alternate text or “alt text�� in order 
-%	to comply with Section 508 accessibility standards. 
+%   REFERENCIAS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Acknowledgments}
-\noindent Delete if not applicable\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Acknowledgments not required
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section*{References}
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{techpubs}
 \nocite{*}
 \bibliography{References}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   RECONOCIMIENTOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgments}
+\noindent Delete if not applicable\\
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Please use the techpubs BibTeX style when compiling bibliography, or follow the instructions on tinyurl.com/techpubsnist to format your .bib / .bbl file appropriately.

@@ -1,15 +1,269 @@
-\usepackage{tcolorbox}
-\usepackage{subcaption}
-\usepackage{alltt}
-\usepackage{svg}
-\usepackage[scaled=0.6]{helvet}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  FICHERO DE CONFIGURACIÓN DEL DOCUMENTO LATEX  %
+%  Secciones:                                    %
+%    1. Importaciones                            %
+%    2. Definiciones                             %
+%    3. Formatos                                 %
+%    4. Entornos                                 %
+%    5. Compilación                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  1. IMPORTACIONES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Matemáticos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsfonts}   % if you want the fonts
+\usepackage{amssymb}    % if you want extra symbols
+\usepackage{bm}
+\usepackage{mathptmx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Figuras y tablas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}   % incluye comandos como \includegraphics
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{tabularray}
+\usepackage{epstopdf} % converting EPS figure files to PDF
+\usepackage{caption} % required for Figure labels
+\usepackage{subcaption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Estética
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor}     % para usar y definir colores
+\usepackage{secdot}		
+\usepackage{wrapfig}    % para envolver las figuras con el texto
+\usepackage{titlesec}
+\usepackage{tocloft}	% change typeset, titles, and format list of appendices/figures/tables
+\usepackage{enumitem}   % para controlar espaciado entre items de listas
+\usepackage[numbers,sort&compress]{natbib} % para formatear bibliografía 
+\usepackage{fancyhdr, lastpage}	% formatting document, calculating number of pages, formatting headers
+\usepackage{tcolorbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Texto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[hang,flushmargin,bottom]{footmisc} % footnote format
+\usepackage[hidelinks]{hyperref}
+\usepackage{alltt}
+\usepackage{listings}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  2. DEFINICIONES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Colores
+%  Dependencias:
+%    - xcolor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{color-uclm}{RGB}{176,8,55} % Adjust the RGB values as needed
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{fondo}{gray}{0.93}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Estilos de códigos
+%  Dependencias:
+%    - listings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Bash
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{bashstyle}{
+    inputencoding=utf8,
+    language=bash,
+    backgroundcolor=\color{fondo},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    framerule=1pt,
+	abovecaptionskip=5pt,
+	belowcaptionskip=5pt,
+    resetmargins=true,
+	literate={á}{{\'a}}1
+        {ã}{{\~a}}1
+        {é}{{\'e}}1
+        {ó}{{\'o}}1
+        {í}{{\'i}}1
+        {ñ}{{\~n}}1
+        {¡}{{!`}}1
+        {¿}{{?`}}1
+        {ú}{{\'u}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  C
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{cstyle}{
+    language=C,
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{fondo},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+	abovecaptionskip=5pt,
+	belowcaptionskip=5pt,
+    tabsize=4,
+	literate={á}{{\'a}}1
+        {ã}{{\~a}}1
+        {é}{{\'e}}1
+        {ó}{{\'o}}1
+        {í}{{\'i}}1
+        {ñ}{{\~n}}1
+        {¡}{{!`}}1
+        {¿}{{?`}}1
+        {ú}{{\'u}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Verilog
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{verilogstyle}{
+  language=Verilog,
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{fondo},
+  commentstyle=\color{mygreen},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\color{mygray},
+  stringstyle=\color{mymauve},
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  showstringspaces=false,
+  tabsize=4,
+  abovecaptionskip=5pt,
+  belowcaptionskip=5pt,
+  literate={á}{{\'a}}1
+        {ã}{{\~a}}1
+        {é}{{\'e}}1
+        {ó}{{\'o}}1
+        {í}{{\'i}}1
+        {ñ}{{\~n}}1
+        {¡}{{!`}}1
+        {¿}{{?`}}1
+        {ú}{{\'u}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  3. FORMATOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Formato de secciones y subsecciones
+%  Dependencias:
+%    - titlesec
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}	% required for heading numbering style
+\titleformat*{\subsection}{\normalsize\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Formato de la tabla de contenidos
+%  Dependencias:
+%    - tocloft
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\cftdot}{}	
+\renewcommand{\contentsname}{Tabla de Contenidos}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} % for parts
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand\cftbeforesecskip{\setlength{4pt}{}}
+\addtolength{\cftfignumwidth}{1em}
+\renewcommand{\cftfigpresnum}{\figurename\ }
+\addtolength{\cfttabnumwidth}{1em}
+\renewcommand{\cfttabpresnum}{\tablename\ }
+\setlength{\cfttabindent}{0in}    %% adjust as you like
+\setlength{\cftfigindent}{0in} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Formato de las sección de referencias/bibliografía
+%  Dependencias:
+%    - natbib -> numbers,sort&compress
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\bibsection}{}
+\setlength{\bibsep}{0.0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Formato de los hyperlinks
+%  Dependencias:
+%    - hyperref -> hidelinks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	colorlinks = true,
+    urlcolor ={blue},
+    citecolor = {.},
+    linkcolor = {.},
+    anchorcolor = {.},
+    filecolor = {.},
+    menucolor = {.},
+    runcolor = {.}
+    pdftitle={},
+    pdfsubject={},
+    pdfauthor={},
+    pdfkeywords={}
+}
+\urlstyle{same}     % para que el estilo del hyperlink sea igual que el del texto
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Formato de las páginas
+%  Dependencias:
+%    - fancyhdr
+%    - lastpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{39pt}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{0.25in}
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{8.5in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Formato de las captions de las figuras
+%  Dependencias:
+%    - caption
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\captionsetup{font=small,labelfont=bf,figurename=Fig.,labelsep=period,justification=raggedright} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  4. ENTORNOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Entorno para caja de conceptos clave
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Define a new tcolorbox environment for key concepts
 \newtcolorbox{keyconceptbox}[1][]{ % Optional argument for title
   colback=blue!5!white, % Use the custom color
@@ -20,7 +274,9 @@
   boxrule=2pt % Border width
 }
 
-% Define a new tcolorbox environment for aclaraciones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Entorno para caja de aclaraciones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newtcolorbox{aclaracion}[1][]{ % Optional argument for title
   colback=red!5!white, % Use the custom color
   colframe=color-uclm, % Use the same color for the border
@@ -30,75 +286,21 @@
   boxrule=2pt % Border width
 }
 
-\usepackage{listings}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Entorno que aplica estilo al código
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstnewenvironment{mycode}[1][]
-{\lstset{#1}} % Options for the listings package
-{}
-
-\lstdefinestyle{mycodestyle}{
-  backgroundcolor=\color{gray!10}, % Background color
-  % Add other styling options as needed
-}
-
-\lstdefinestyle{cstyle}{
-    language=C,
-    basicstyle=\ttfamily,
-    keywordstyle=\color{blue},
-    commentstyle=\color{green!40!black},
-    stringstyle=\color{red},
-    numbers=left,
-    numberstyle=\tiny,
-    numbersep=5pt,
-    frame=single,
-    breaklines=true,
-    breakatwhitespace=true,
-    captionpos=b,
-    showstringspaces=false,
-    tabsize=4
-}
+{%
+\lstset{#1}%
+}{}
 
 
-\lstdefinestyle{verilogstyle}{
-  language=Verilog, % Set the language to Verilog
-  basicstyle=\ttfamily\small,
-  commentstyle=\color{mygreen},
-  keywordstyle=\color{blue},
-  numberstyle=\tiny\color{mygray},
-  stringstyle=\color{mymauve},
-  breaklines=true,
-  frame=single,
-  numbers=left,
-  showstringspaces=false
-}
-
-
-\usepackage{wrapfig}
-
-
-% lcverbatim
-\usepackage{fancyvrb,newverbs,xcolor}
-
-%\setmonofont[Scale=0.8]{Courier New Bold}
-\definecolor{cverbbg}{gray}{0.93}
-\newenvironment{cverbatim}
- {\SaveVerbatim{cverb}}
- {\endSaveVerbatim
-  \flushleft\fboxrule=0pt\fboxsep=.5em
-  \colorbox{cverbbg}{\BUseVerbatim{cverb}}%
-  \endflushleft
-}
-\newenvironment{lcverbatim}
- {\SaveVerbatim{cverb}}
- {\endSaveVerbatim
-  \flushleft\fboxrule=0pt\fboxsep=.5em
-  \colorbox{cverbbg}{%
-    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
-  }
-  \endflushleft
-}
-\newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}
-\newverbcommand{\cverb}
-  {\setbox\verbbox\hbox\bgroup}
-  {\egroup\colorbox{cverbbg}{\box\verbbox}}
-% lcverbatim
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  5. COMPILACIÓN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Version de pdf en que se compilará el documento
+%  Referencias:
+%    - https://tex.stackexchange.com/questions/52317/pdftex-warning-version-allowed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfminorversion=7      % versión 1.7

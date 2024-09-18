@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  CAPÍTULO 1
+%  Referencias:
+%    - https://veripool.org/ftp/verilator_doc.pdf
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introducción}\label{cap:introduccion}
+Verilator es un software que convierte diseños Verilog y SystemVerilog en modelos C++ o SystemC que pueden ser ejecutados con posterioridad. Por lo tanto, Verilator es más un compilador que un simulador.
+
+Su uso consiste en los siguientes pasos:
+\begin{enumerate}
+    \item \textbf{Verilar.} Se invoca Verilator como se haría con herramientas como GCC. Verilator entonces lee el código en SystemVerilog y lo compila en un modelo C++ (SystemC). Este proceso se conoce como ``Verilar'' y la salida se denomina modelo ``Verilado''
+    \item \textbf{Envolver.} De cara a simular el modelo Verilado, hay que envolverlo en un \textit{wrapper} Escrito en C++. Dicho wrapper incluye una función \verb|main| que instancia el modelo verilado e ``inyecta'' diferentes valores en las entradas para testear el diseño
+    \item \textbf{Compilar.} Se compila el wrapper con el compilador de C++ para generar el ejecutable de la simulación.
+    \item \textbf{Simular.} Se ejecuta el ejecutable para llevar a cabo la simulación.
+    \item \textbf{Depurar. } Si se habilita la generación de trazas en el wrapper, se genera un fichero que se puede utilizar para visualizar las formas de onda del diseño durante la simulación.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Sección 1.1 - Instalación
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Instalación}\label{sec:instalacion}
+Verilator ha sido desarrollado y testeado en Ubuntu, por lo que se recomienda este Sistema Operativo para su instalación. Existen dos modos de instalar Verilator:
+\begin{itemize}
+    \item \textbf{Binario.} Consiste en instalar el ejecutable a través del gestor de paquetes\footnote{Las instrucciones son para Ubuntu.}.
+
+    \begin{mycode}[style=bashstyle]
+sudo apt install verilator
+    \end{mycode}
+
+    Este modo de instalación es menos flexible que compilar el código fuente y seguramente la versión instalada no sea la última disponible, pero es más sencillo y directo.
+    
+    \item \textbf{Código fuente.} Consiste en compilar el código fuente a través de git.
+
+    \begin{mycode}[style=bashstyle]
+# Dependencias:
+sudo apt-get install git help2man perl python3 make autoconf g++ flex bison ccache
+sudo apt-get install libgoogle-perftools-dev numactl perl-doc
+sudo apt-get install libfl2 # Ubuntu only (ignore if gives error)
+sudo apt-get install libfl-dev # Ubuntu only (ignore if gives error)
+sudo apt-get install zlibc zlib1g zlib1g-dev # Ubuntu only (ignore if gives error)
+
+# Clonacion del repositorio
+git clone https://github.com/verilator/verilator # Only first time
+        
+# Cada vez que haya que hacer el build:
+unsetenv VERILATOR_ROOT # For csh; ignore error if on bash
+unset VERILATOR_ROOT # For bash
+cd verilator
+git pull                 # Actualizar el repositorio de git
+git tag                  # Listar las versiones
+#git checkout master     # Use development branch (e.g. recent bug fixes)
+#git checkout stable     # Use most recent stable release
+#git checkout v{version} # Cambiar a una version concreta
+autoconf                 # Crear el fichero ./configure
+./configure              # Configurar y crear el Makefile
+make -j `nproc`          # Construir Verilator (si da error, intentar solo 'make')
+sudo make install
+    \end{mycode}
+
+    Este modo de instalación es más flexible, ya que permite instalar diferentes versiones del software que se adapten mejor a entornos concretos, pero es más laborioso. Para instrucciones más detalladas acerca de este modo de instalación véase \url{https://veripool.org/ftp/verilator_doc.pdf}.
+\end{itemize}
