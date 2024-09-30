@@ -11,7 +11,7 @@ Su uso consiste en los siguientes pasos:
     \item \textbf{Verilar.} Se invoca Verilator como se haría con herramientas como GCC. Verilator entonces lee el código en SystemVerilog y lo compila en un modelo C++ (SystemC). Este proceso se conoce como ``Verilar'' y la salida se denomina modelo ``Verilado''
     \item \textbf{Envolver.} De cara a simular el modelo Verilado, hay que envolverlo en un \textit{wrapper} Escrito en C++. Dicho wrapper incluye una función \verb|main| que instancia el modelo verilado e ``inyecta'' diferentes valores en las entradas para testear el diseño
     \item \textbf{Compilar.} Se compila el wrapper con el compilador de C++ para generar el ejecutable de la simulación.
-    \item \textbf{Simular.} Se ejecuta el ejecutable para llevar a cabo la simulación.
+    \item \textbf{Simular.} Se lanza el ejecutable para llevar a cabo la simulación.
     \item \textbf{Depurar. } Si se habilita la generación de trazas en el wrapper, se genera un fichero que se puede utilizar para visualizar las formas de onda del diseño durante la simulación.
 \end{enumerate}
 
